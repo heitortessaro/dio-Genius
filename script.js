@@ -1,3 +1,13 @@
+// const DEFAULT_blue = '#0000ff';
+// const TRANSITORY_blue = '#00a2ff'
+// const DEFAULT_red = '#ff0000';
+// const TRANSITORY_red = '#ff3c00'
+// const DEFAULT_green = '#ff0000';
+// const TRANSITORY_green = '#ff3c00'
+
+const DEFAULT_buttonsOperation = '#5e5934';
+const DEFAULT_buttons = '#5E4434';
+
 let order = [];
 let clickedOrder = [];
 let score = 0;
@@ -25,22 +35,23 @@ let shuffleOrder = () => {
 }
 
 // show the selected color in order
-let showColorOrder = () => {
+let showColorOrder = async () => {
     for (let i in order) {
         let elementColor = createColorElement(order[i]);
-        lightColor(elementColor, Number(i) + 1);
+        // lightColor(elementColor, Number(i) + 1);
+        await lightColor(elementColor);
     }
 }
 
-// change color of the selected color in the game
-let lightColor = (element, number) => {
-    number = number * 500;
-    setTimeout(() => {
-        element.classList.add('selected');
-    }, number - 250);
-    setTimeout(() => {
-        element.classList.remove('selected');
-    });
+let lightColor = async (element) => {
+    element.classList.add('selected');
+    await delay(250);
+    element.classList.remove('selected');
+    await delay(250);
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // check if the player selected the right order of colors
@@ -58,14 +69,14 @@ let checkColor = () => {
 }
 
 // uses the mouse click as trigger
-let click = (color) => {
+let click = async (color) => {
     clickedOrder[clickedOrder.length] = color;
     createColorElement(color).classList.add('selected');
-
-    setTimeout(() => {
-        createColorElement(color).classList.remove('selected');
-        checkColor();
-    }, 250)
+    await delay(200);
+    // setTimeout(() => {
+    createColorElement(color).classList.remove('selected');
+    checkColor();
+    // }, 500)
 
 
 }
@@ -86,6 +97,7 @@ let createColorElement = (color) => {
 // next game level
 let nextLevel = () => {
     score++;
+    clickedOrder = [];
     shuffleOrder();
 }
 
@@ -107,10 +119,6 @@ let playGame = () => {
 
 
 // add listners
-// green.addEventListener('click', click(0));
-// red.addEventListener('click', click(1));
-// yellow.addEventListener('click', click(2));
-// blue.addEventListener('click', click(3));
 greenBtn.onclick = () => click(0);
 redBtn.onclick = () => click(1);
 yellowBtn.onclick = () => click(2);

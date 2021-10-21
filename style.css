@@ -38,7 +38,7 @@ body {
 
 .red {
     grid-area: colorRed;
-    background-color: red;
+    background-color: #ff0000;
     border-top-right-radius: 100%;
     border-bottom-left-radius: 10%;
     border-top-left-radius: 10%;
@@ -64,5 +64,9 @@ body {
 }
 
 .selected {
-    opacity: 0.75;
+    opacity: 0.60;
+    transform: scale(1.03);
+    /* border-color: #ffc600; */
+    /* box-shadow: 0 0 1rem #ffc600; */
+    /* transition: all 0.4s ease; */
 }
