@@ -1,22 +1,67 @@
-body {
-    margin: 0;
-    background-color: aquamarine;
+html {
+    /* footer support */
+    /* position: relative; */
+    height: 100%;
+    min-width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.main-game{
-    height: 100vh;
+/* reset */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    background-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 72px;
+    background: linear-gradient(to right, blue, green, yellow, yellow, red);
+    color: transparent;
+    background-clip: text;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 10px;
+    font-size: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    width: auto;
+    /* border: 2px solid red; */
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.main-game {
+    height: 100vw;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 
 .genius {
+    /* align-self: center; */
+    /* margin-top: 10%;
+    margin-bottom: 10%; */
     display: grid;
     /* atribui nome as areas do grid
     os nomes são associados aos divs abaixo */
-    grid-template-areas: 'colorGreen colorRed'
-    'colorYellow colorBlue';
+    grid-template-areas: 'colorGreen colorRed' 'colorYellow colorBlue';
     grid-gap: 10px;
     border: white;
     background-color: white;
@@ -24,7 +69,6 @@ body {
     /* margin-top: 20%; */
     width: 700px;
     height: 700px;
-
 }
 
 .blue {
@@ -69,4 +113,30 @@ body {
     /* border-color: #ffc600; */
     /* box-shadow: 0 0 1rem #ffc600; */
     /* transition: all 0.4s ease; */
+}
+
+.footer {
+    /* position: absolute;
+    bottom: 0;
+    left: 0;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding-top: 10px;
+    font-size: 22px;
+    color: black;
+    vertical-align: middle;
+}
+
+.gitBtn {
+    background-image: url('./imgs/github-logo.svg');
+    background-color: white;
+    background-size: 99%;
+    border: none;
+    border-radius: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
