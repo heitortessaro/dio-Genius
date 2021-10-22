@@ -23,6 +23,7 @@ const blueBtn = document.querySelector('.blue');
 const redBtn = document.querySelector('.red');
 const greenBtn = document.querySelector('.green');
 const yellowBtn = document.querySelector('.yellow');
+const startBtn = document.querySelector('.startBtn')
 
 
 // function
@@ -32,6 +33,7 @@ let shuffleOrder = () => {
     let lastColor = Math.floor(Math.random() * 4);
     order[order.length] = lastColor;
     showColorOrder();
+    enableBtns();
 }
 
 // show the selected color in order
@@ -98,6 +100,7 @@ let createColorElement = (color) => {
 let nextLevel = () => {
     score++;
     clickedOrder = [];
+    desableBtns();
     shuffleOrder();
 }
 
@@ -106,22 +109,36 @@ let loseGame = () => {
     alert(`Pontuação final: ${score}\nVocê perdeu o jogo!\nClique em OK para reiniciar o jogo.`);
     order = [];
     clickedOrder = [];
-
-    playGame();
+    startBtn.onclick = () => {
+        startBtn.onclick = null;
+        playGame();
+    };
 }
 
 let playGame = () => {
-    alert('Bem vindo ao jogo Genius! Iniciando jogo!');
     score = 0;
-
+    order = [];
+    clickedOrder = [];
     nextLevel();
+}
+
+let enableBtns = () => {
+    greenBtn.onclick = () => click(0);
+    redBtn.onclick = () => click(1);
+    yellowBtn.onclick = () => click(2);
+    blueBtn.onclick = () => click(3);
+}
+
+let desableBtns = () => {
+    greenBtn.onclick = null;
+    redBtn.onclick = null
+    yellowBtn.onclick = null
+    blueBtn.onclick = null
 }
 
 
 // add listners
-greenBtn.onclick = () => click(0);
-redBtn.onclick = () => click(1);
-yellowBtn.onclick = () => click(2);
-blueBtn.onclick = () => click(3);
-
-playGame();
+startBtn.onclick = () => {
+    startBtn.onclick = null;
+    playGame();
+};
