@@ -24,6 +24,7 @@ const redBtn = document.querySelector('.red');
 const greenBtn = document.querySelector('.green');
 const yellowBtn = document.querySelector('.yellow');
 const startBtn = document.querySelector('.startBtn')
+const information = document.querySelector('.information')
 
 
 // function
@@ -58,14 +59,16 @@ function delay(ms) {
 
 // check if the player selected the right order of colors
 let checkColor = () => {
+    debugger;
     for (let i in clickedOrder) {
         if (clickedOrder[i] != order[i]) {
             loseGame();
-            break;
+            return;
         }
     }
     if (clickedOrder.length == order.length) {
-        alert(`Pontuação: ${score}\n Você acertou! Iniciando próxima rodada!`);
+        //alert(`Pontuação: ${score}\n Você acertou! Iniciando próxima rodada!`);
+        information.textContent = `Pontuação: ${score}\n Você acertou! Iniciando próxima rodada!`;
         nextLevel();
     }
 }
@@ -106,11 +109,14 @@ let nextLevel = () => {
 
 // game over function
 let loseGame = () => {
-    alert(`Pontuação final: ${score}\nVocê perdeu o jogo!\nClique em OK para reiniciar o jogo.`);
+    // alert(`Pontuação final: ${score}\nVocê perdeu o jogo!\nClique em OK para reiniciar o jogo.`);
+    information.textContent = `Pontuação final: ${score}\nVocê perdeu o jogo!\nClique Start Game para reiniciar o jogo.`;
     order = [];
     clickedOrder = [];
+    desableBtns();
     startBtn.onclick = () => {
         startBtn.onclick = null;
+        information.textContent = '_';
         playGame();
     };
 }
@@ -136,9 +142,9 @@ let desableBtns = () => {
     blueBtn.onclick = null
 }
 
-
 // add listners
 startBtn.onclick = () => {
     startBtn.onclick = null;
+    information.textContent = '_';
     playGame();
 };
