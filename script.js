@@ -59,7 +59,6 @@ function delay(ms) {
 
 // check if the player selected the right order of colors
 let checkColor = () => {
-    debugger;
     for (let i in clickedOrder) {
         if (clickedOrder[i] != order[i]) {
             loseGame();
@@ -67,9 +66,16 @@ let checkColor = () => {
         }
     }
     if (clickedOrder.length == order.length) {
-        //alert(`Pontuação: ${score}\n Você acertou! Iniciando próxima rodada!`);
-        information.textContent = `Pontuação: ${score}\n Você acertou! Iniciando próxima rodada!`;
-        nextLevel();
+        score++;
+        information.textContent = `You won the round! Score: ${score}\n! Push Next Round to continue.`;
+        desableBtns();
+        startBtn.textContent = "Next Round";
+        startBtn.onclick = () => {
+            startBtn.onclick = null;
+            startBtn.textContent = 'Playing';
+            information.textContent = `You won the round! Score: ${score}\n!`;
+            nextLevel();
+        };
     }
 }
 
@@ -101,19 +107,18 @@ let createColorElement = (color) => {
 
 // next game level
 let nextLevel = () => {
-    score++;
     clickedOrder = [];
-    desableBtns();
     shuffleOrder();
 }
 
 // game over function
 let loseGame = () => {
     // alert(`Pontuação final: ${score}\nVocê perdeu o jogo!\nClique em OK para reiniciar o jogo.`);
-    information.textContent = `Pontuação final: ${score}\nVocê perdeu o jogo!\nClique Start Game para reiniciar o jogo.`;
+    information.textContent = `Game Over! Final score: ${score}. Push Start Game to play again.`;
     order = [];
     clickedOrder = [];
     desableBtns();
+    startBtn.textContent = 'Start Game';
     startBtn.onclick = () => {
         startBtn.onclick = null;
         information.textContent = '_';
@@ -145,6 +150,7 @@ let desableBtns = () => {
 // add listners
 startBtn.onclick = () => {
     startBtn.onclick = null;
+    startBtn.textContent = 'Playing';
     information.textContent = '_';
     playGame();
 };
